@@ -62,12 +62,12 @@ const loginAccount = async (req, res) => {
             user: {
                 id: userAccount.accountID ?? userAccount.id,
                 username: userAccount.username,
-                email: userAccount.email
+                email: userAccount.email,
+                role: userAccount.role
             }
         });
 
     } catch (error) {
-        console.error(error);
         res.status(500).send({
             success: false,
             message: 'Error in Login API',

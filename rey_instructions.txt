@@ -1,0 +1,29 @@
+# Setup Instructions for Lagman’s Diner
+
+## 1. Prerequisites
+- Node.js (v18+)
+- MySQL Server (locally running)
+
+## 2. Environment Configuration
+Create a `.env` file in the root directory and add the following:
+DB_HOST=localhost
+DB_USER=your_username
+DB_PASSWORD=your_password
+DB_NAME=accountdb
+PORT=8000
+
+## 3. Database Setup
+Create your database and tables in MySQL. Ensure the database name matches `DB_NAME` in your `.env`.
+Example Table Schema (for reservations):
+CREATE TABLE reservationttbl (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    DateD DATE NOT NULL,
+    TableNum INT NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    number VARCHAR(20) NOT NULL
+);
+
+## 4. Installation & Running
+1. Run `npm install` in the terminal.
+2. Start the server using `npm start`.
+3. Access the application at http://localhost:8000.

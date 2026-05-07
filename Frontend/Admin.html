@@ -3,9 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-wrapper { padding: 40px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 2px solid black; padding: 15px; text-align: center; }
+        th { background-color: var(--accent-color); color: white; }
+    </style>
 </head>
 <body>
-    
+    <div class="admin-wrapper">
+        <h1>Reservation Dashboard</h1>
+        <table id="res-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Table</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody id="res-body"></tbody>
+        </table>
+    </div>
+
+    <script>
+        async function fetchReservations() {
+            try {
+                const response = await fetch('http://localhost:8000/api/v1/reservationttbl/all');
+                const data = await response.json();
+                const tbody = document.getElementById('res-body');
+                tbody.innerHTML = '';
+                data.reservations.forEach(res => {
+                    tbody.innerHTML += `<tr>
+                        <td>${res.id}</td>
+                        <td>${res.DateD.split('T')[0]}</td>
+                        <td>${res.TableNum}</td>
+                        <td>${res.email}</td>
+                        <td>${res.number}</td>
+                    </tr>`;
+                });
+            } catch (err) { console.error(err); }
+        }
+        fetchReservations();
+    </script>
 </body>
 </html>

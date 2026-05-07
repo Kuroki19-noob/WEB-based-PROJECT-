@@ -1,11 +1,11 @@
 const form = document.getElementById('form');
 const errorDisplay = document.getElementById('error-msg');
+const apiBase = `${window.location.origin}/api/v1`;
 
 if (form) {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        // Get ALL input values
         const dateInput = document.getElementById('dateID');
         const emailInput = document.getElementById('email-id');
         const phoneInput = document.getElementById('phone-id');
@@ -13,22 +13,18 @@ if (form) {
         const usernameInput = document.getElementById('username-input');
         const passwordInput = document.getElementById('password-input');
         const repeatPasswordInput = document.getElementById('repeat-password-input');
-        
-        // CHECK: Are we on the Reservation page?
         const isReservationPage = document.getElementById('dateID') !== null;
-        
+
         if (isReservationPage) {
-            // Get values and pass them to the function
             const dateVal = dateInput.value;
             const emailVal = emailInput.value.trim();
             const phoneVal = phoneInput.value.trim();
             const tableVal = parseInt(tableInput.value);
-            
+
             getReservationError(dateVal, emailVal, phoneVal, tableVal);
             return;
         }
 
-        // Logic for Login/Signup
         const user = usernameInput?.value.trim() || '';
         const email = emailInput?.value.trim() || '';
         const pass = passwordInput?.value || '';
@@ -61,7 +57,7 @@ async function getSignupError(user, email, pass, repeatPass) {
     }
 
     try {
-        const response = await fetch('http://localhost:8000/api/v1/accounttbl/create-account', {
+        const response = await fetch(`${apiBase}/accounttbl/create-account`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
@@ -79,7 +75,7 @@ async function getSignupError(user, email, pass, repeatPass) {
             errorDisplay.innerHTML = "Account successfully made! Redirecting...";
             
             setTimeout(() => {
-                window.location.href = "Login.html";
+                window.location.href = "/Login.html";
             }, 2000);
         } else {
             errorDisplay.style.color = "red";
@@ -116,7 +112,7 @@ async function getLoginError(email, pass) {
         errorDisplay.style.color = "blue";
         errorDisplay.innerHTML = "Logging in...";
 
-        const response = await fetch('http://localhost:8000/api/v1/accounttbl/login', {
+        const response = await fetch(`${apiBase}/accounttbl/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: email, password: pass }) 
@@ -130,7 +126,7 @@ async function getLoginError(email, pass) {
             localStorage.setItem('user', JSON.stringify(result.user));
 
             alert("Login successful! Redirecting...");
-            window.location.href = "index.html";
+            window.location.href = "/index.html";
         } else {
             errorDisplay.style.color = "red";
             errorDisplay.innerHTML = result.message || "Invalid credentials.";
@@ -149,7 +145,6 @@ async function getLoginError(email, pass) {
 async function getReservationError(dateVal, emailVal, phoneVal, tableVal) {
     const errorDisplay = document.getElementById('error-msg');
 
-    // 1. Validation
     if (!dateVal || !emailVal || !phoneVal || isNaN(tableVal)) {
         errorDisplay.style.color = "red";
         errorDisplay.innerHTML = "All fields are required.";
@@ -162,7 +157,6 @@ async function getReservationError(dateVal, emailVal, phoneVal, tableVal) {
         return;
     }
 
-    // Validate phone number format (basic check)
     const phoneRegex = /^\d{10,}$/;
     if (!phoneRegex.test(phoneVal.replace(/\D/g, ''))) {
         errorDisplay.style.color = "red";
@@ -174,12 +168,12 @@ async function getReservationError(dateVal, emailVal, phoneVal, tableVal) {
         errorDisplay.style.color = "blue";
         errorDisplay.innerHTML = "Sending reservation...";
 
-        const response = await fetch('http://localhost:8000/api/v1/reservationttbl/create-reservation', {
+        const response = await fetch(`${apiBase}/reservationttbl/create-reservation`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 DateD: dateVal,
-                TableNum: tableVal, // Send as number
+                TableNum: tableVal,
                 email: emailVal,
                 number: phoneVal
             })
@@ -191,7 +185,7 @@ async function getReservationError(dateVal, emailVal, phoneVal, tableVal) {
             errorDisplay.style.color = "green";
             errorDisplay.innerHTML = "Reservation Successful! Redirecting...";
             setTimeout(() => {
-                window.location.href = "index.html";
+                window.location.href = "/index.html";
             }, 2000);
         } else {
             errorDisplay.style.color = "red";

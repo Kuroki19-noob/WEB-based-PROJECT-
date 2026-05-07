@@ -1,50 +1,50 @@
+const path = require('path');
 const express = require('express');
-const cors = require('cors')
-const bcrypt = require('bcrypt')
-const colors = require('colors')
-const morgan = require ('morgan')
+const cors = require('cors');
+const helmet = require('helmet');
+const colors = require('colors');
+const morgan = require('morgan');
 const dotenv = require('dotenv');
 const mySqlPool = require('./config/db');
 
-
-
-dotenv.config()
-
-
+dotenv.config();
 
 const app = express();
+const frontendPath = path.join(__dirname, '..', 'Frontend');
+const PORT = process.env.PORT || 8000;
 
-app.use(cors())
-app.use(morgan("dev"))
-app.use(express.json())
+app.use(helmet());
+app.use(cors());
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.static(frontendPath));
 
-app.use("/api/v1/accounttbl", require("./routes/accountsRoutes"))
+app.use("/api/v1/accounttbl", require("./routes/accountsRoutes"));
 app.use("/api/v1/reservationttbl", require("./routes/reservationRoutes"));
 
-app.use((req, res, next) => {
-    if (req.method === 'POST') {
-        console.log('🔵 Incoming POST to:', req.path);
-        console.log('🔵 Body:', JSON.stringify(req.body, null, 2));
-    }
-    next();
+app.use((err, req, res, next) => {
+    res.status(err.status || 500).send({
+        success: false,
+        message: err.message
+    });
 });
 
 app.get('/test', (req,res ) =>{
-    res.status(200).send('HEllo world');
-})
+    res.status(200).send('Hello world');
+});
 
-const PORT = process.env.PORT || 8000
+app.get('/', (req, res) => {
+    res.sendFile(path.join(frontendPath, 'index.html'));
+});
 
 mySqlPool
 .query('SELECT 1')
 .then(()=> {
-
-    console.log('MySQL DB Connected'.bgYellow.white)
+    console.log('MySQL DB Connected'.bgYellow.white);
 
     app.listen(PORT, () =>{
-    console.log(`Server Running on port ${process.env.PORT}`.bgBlack.white);
-  });
-
+        console.log(`Server Running on port ${PORT}`.bgBlack.white);
+    });
 })
 .catch((error) =>{
      console.log(error);

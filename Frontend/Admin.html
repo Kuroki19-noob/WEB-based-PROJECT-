@@ -3,31 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard | Lagman’s Diner</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .admin-wrapper { padding: 40px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 2px solid black; padding: 15px; text-align: center; }
-        th { background-color: var(--accent-color); color: white; }
-    </style>
 </head>
 <body>
-    <div class="admin-wrapper">
+    <main class="container">
         <h1>Reservation Dashboard</h1>
-        <table id="res-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Table</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                </tr>
-            </thead>
-            <tbody id="res-body"></tbody>
-        </table>
-    </div>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; margin-top: 2rem; border: 1px solid var(--border-color);">
+                <thead>
+                    <tr style="background-color: var(--accent-color); color: white;">
+                        <th style="padding: 1rem;">ID</th>
+                        <th style="padding: 1rem;">Date</th>
+                        <th style="padding: 1rem;">Table</th>
+                        <th style="padding: 1rem;">Email</th>
+                        <th style="padding: 1rem;">Phone</th>
+                    </tr>
+                </thead>
+                <tbody id="res-body"></tbody>
+            </table>
+        </div>
+    </main>
 
     <script>
         async function fetchReservations() {
@@ -38,11 +34,11 @@
                 tbody.innerHTML = '';
                 data.reservations.forEach(res => {
                     tbody.innerHTML += `<tr>
-                        <td>${res.id}</td>
-                        <td>${res.DateD.split('T')[0]}</td>
-                        <td>${res.TableNum}</td>
-                        <td>${res.email}</td>
-                        <td>${res.number}</td>
+                        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">${res.id}</td>
+                        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">${res.DateD.split('T')[0]}</td>
+                        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">${res.TableNum}</td>
+                        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">${res.email}</td>
+                        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">${res.number}</td>
                     </tr>`;
                 });
             } catch (err) { console.error(err); }

@@ -3,99 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team - </title>
+    <title>Our Team | Lagman’s Diner</title>
     <link rel="stylesheet" href="/style.css">
-    <script src="/logout.js" ></script>
+    <script src="/logout.js" defer></script>
+    <style>
+        .team-grid { display: grid; gap: 3rem; margin-top: 3rem; }
+        .team-card { display: flex; align-items: center; gap: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 3rem; }
+        .team-card img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; }
+        @media (max-width: 768px) { .team-card { flex-direction: column; text-align: center; } }
+    </style>
 </head>
 <body>
     <nav class="top-bar">
-    <ul class="top-bar-content">
-        <li class="nav-item"><a href="/index.html">Home</a></li>
-        <li class="nav-item"><a href="/Pages/menu.html">Menu</a></li>
-        <li class="nav-item"><a href="/Pages/Reservation.html">Reservation</a></li>
-        <li class="nav-item"><a href="/Pages/team.html">Team</a></li>
-        <li class="nav-item" id="logoutbtn"><a href="Login.html" id="logoutBtn" class="nav-link logout-link">LOGOUT</a></li>
-    </ul>
+        <div class="container">
+            <ul class="top-bar-content" style="list-style: none; display: flex; gap: 2rem; justify-content: center;">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/Pages/menu.html">Menu</a></li>
+                <li><a href="/Pages/Reservation.html">Reservation</a></li>
+                <li><a href="/Pages/team.html">Team</a></li>
+            </ul>
+        </div>
     </nav>
 
-
-    <div class="team-container">
-              <div class="team-wrap">
-                    <div class="team-img">
-                      <img src="/team-images/legua.jpg" alt="System Analyst">
-                    </div>
-                    <div class="text-team">
-                         <h1>Sophia Legua</h1>
-                         <h2>System Analyst </h2>
-                         <p>Analyzes needs, designs solutions, and ensures technology aligns perfectly with goals.</p>
-                         <br><cite>"Errors happen, but always find a way to debug."</cite>
-                    </div>
-               </div>
-               <div class="team-wrap">
-                    <div class="team-img">
-                      <img src="/team-images/navalis-pisbok.png" alt="Data Analyst">
-                    </div>
-                    <div class="text-team">
-                         <h1>Mikko Lim Navales</h1>
-                         <h2>Data Analyst </h2>
-                         <p>Analyzes data to find issues or weaknesses, Shows what is happening over time, Gives insights that help in brainstorming and planning </p>
-                         <br><cite>"Small steps today, big success tomorrow."</cite>
-                    </div>
-               </div>
-               <div class="team-wrap">
-                    <div class="team-img">
-                      <img src="/team-images/lagmanpisbok.jpg" alt="document specialists">
-                    </div>
-                    <div class="text-team">
-                         <h1>Jomarie Lagman</h1>
-                         <h2>document specialist </h2>
-                         <p> Authored and organized the project documentation including Chapters 1 to 5 of the thesis manuscript.</p>
-                         <br><cite>"Dream big, work hard, stay consistent"</cite>
-                    </div>
-               </div>
-               <div class="team-wrap">
-                    <div class="team-img">
-                      <img src="/team-images/mandie.jpg" alt="Programmer">
-                    </div>
-                    <div class="text-team">
-                         <h1>Mandie Manuel</h1>
-                         <h2>Programmer</h2>
-                         <p>Creates front end,back end ,Database uses HTML,CSS,Javascript,mysql</p>
-                         <br><cite>"If(Isucceed == true) {console.log('I made it')}  else{Repeat}"</cite>
-                    </div>
-               </div>
-               <div class="team-wrap">
-                    <div class="team-img">
-                      <img src="/team-images/Troy.jpg" alt="Leader">
-                    </div>
-                    <div class="text-team">
-                         <h1>troy iverson pabon</h1>
-                         <h2>Project Manager</h2>
-                         <p>Contribution by guiding their team toward shared goals while inspiring trust, accountability, and growth.</p>
-                         <br><cite>"Make today count"</cite>
-                    </div>
-               </div>
-    </div>
-
-
-
-    <div class="container-wrapper">
-        <div class="wrapper" >
-
+    <main class="container">
+        <h1>Meet Our Team</h1>
+        <div class="team-grid">
+            <div class="team-card">
+                <img src="/team-images/legua.jpg" alt="Sophia Legua">
+                <div>
+                    <h2>Sophia Legua</h2>
+                    <p><strong>System Analyst</strong></p>
+                    <p>Analyzes needs, designs solutions, and ensures technology aligns perfectly with goals.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="/team-images/navalis-pisbok.png" alt="Mikko Lim Navales">
+                <div>
+                    <h2>Mikko Lim Navales</h2>
+                    <p><strong>Data Analyst</strong></p>
+                    <p>Gives insights that help in brainstorming and planning.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="/team-images/lagmanpisbok.jpg" alt="Jomarie Lagman">
+                <div>
+                    <h2>Jomarie Lagman</h2>
+                    <p><strong>Document Specialist</strong></p>
+                    <p>Authored and organized the project documentation for the thesis manuscript.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="/team-images/mandie.jpg" alt="Mandie Manuel">
+                <div>
+                    <h2>Mandie Manuel</h2>
+                    <p><strong>Programmer</strong></p>
+                    <p>Creates front end, back end, and database using HTML, CSS, JavaScript, and MySQL.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="/team-images/Troy.jpg" alt="Troy Iverson Pabon">
+                <div>
+                    <h2>Troy Iverson Pabon</h2>
+                    <p><strong>Project Manager</strong></p>
+                    <p>Guiding the team toward shared goals while inspiring trust and accountability.</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </main>
 
-
-
-
-
-
-
-    <footer>
-        <div class="footer-wrap">
-            <div class="footer-wrap-title">
-            <h1>Lagman’s Diner</h1><h1><h3>&copy;</h3\>2026</h1>
-        </div>
+    <footer class="container" style="text-align: center; border-top: 1px solid var(--border-color); margin-top: 4rem;">
+        <p>&copy; 2026 Lagman’s Diner</p>
     </footer>
 </body>
 </html>

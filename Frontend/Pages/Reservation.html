@@ -3,67 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservation -</title>
+    <title>Reservation | Lagman’s Diner</title>
     <link rel="stylesheet" href="/style.css">
     <script src="/script.js" defer></script>
-    <script src="/limitdate.js"></script>
-    <script src="/logout.js" ></script>
+    <script src="/limitdate.js" defer></script>
+    <script src="/logout.js" defer></script>
 </head>
 <body>
     <nav class="top-bar">
-    <ul class="top-bar-content">
-        <li class="nav-item"><a href="/index.html">Home</a></li>
-        <li class="nav-item"><a href="/Pages/menu.html">Menu</a></li>
-        <li class="nav-item"><a href="/Pages/Reservation.html">Reservation</a></li>
-        <li class="nav-item"><a href="/Pages/team.html">Team</a></li>
-        
-        <li class="nav-item" id="logoutbtn"><a href="Login.html" id="logoutBtn" class="nav-link logout-link">LOGOUT</a></li>
-    </ul>
+        <div class="container">
+            <ul class="top-bar-content" style="list-style: none; display: flex; gap: 2rem; justify-content: center;">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/Pages/menu.html">Menu</a></li>
+                <li><a href="/Pages/Reservation.html">Reservation</a></li>
+                <li><a href="/Pages/team.html">Team</a></li>
+            </ul>
+        </div>
     </nav>
-    <div class="reserve-wrapper">
+
+    <main class="container">
         <h1>Reservation</h1>
-        
-        <div class="reserve-content">
-            <div id="error-msg"></div>
-            <div class="reserve-border">
-                 
-            
-                <form id="form" class="reserve-form">
-    
-               <label for="name-id">Name:</label>
-               <input type="text" id="name-id" required>
-
-               <label for="email-id">Email:</label>
-               <input type="email" id="email-id" required>
-
-               <label for="table-id">Table Number:</label>
-               <input type="number" id="table-id" min="1" max="13" value="1" required>
-
-              <label for="phone-id">Phone Number:</label>
-              <input type="tel" id="phone-id" required>
-
-              <label for="dateID">Date:</label>
-              <input type="date" id="dateID" required>
-
-              <button type="submit">Submit</button>
-</form>
-            </div>
+        <div id="error-msg" style="color: red; margin-bottom: 1rem;"></div>
+        <div style="max-width: 500px; margin: 0 auto; background: white; padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color);">
+            <form id="form">
+                <label>Name:</label>
+                <input type="text" id="name-id" required style="margin-bottom: 1rem;">
+                
+                <label>Email:</label>
+                <input type="email" id="email-id" required style="margin-bottom: 1rem;">
+                
+                <label>Table Number:</label>
+                <input type="number" id="table-id" min="1" max="13" value="1" required style="margin-bottom: 1rem;">
+                
+                <label>Phone Number:</label>
+                <input type="tel" id="phone-id" required style="margin-bottom: 1rem;">
+                
+                <label>Date:</label>
+                <input type="date" id="dateID" required style="margin-bottom: 1rem;">
+                
+                <button type="submit">Submit Reservation</button>
+            </form>
         </div>
-    </div>
+    </main>
 
-
-   <div class="container-wrapper">
-        <div class="wrapper" >
-
-        </div>
-    </div>
-    <footer>
-        
-        <div class="footer-wrap">
-            <div class="footer-wrap-title">
-            <h1>Lagman’s Diner</h1><h1><h3>&copy;</h3\>2026</h1>
-            </div>
-        </div>
+    <footer class="container" style="text-align: center; border-top: 1px solid var(--border-color); margin-top: 4rem;">
+        <p>&copy; 2026 Lagman’s Diner</p>
     </footer>
 </body>
 </html>

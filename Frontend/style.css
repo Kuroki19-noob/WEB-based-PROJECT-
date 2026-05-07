@@ -40,6 +40,18 @@ h1, h2 {
     padding: 2rem 0;
 }
 
+/* Background Utilities */
+.hero-bg {
+    background-image: url('https://images.pexels.com/photos/36718511/pexels-photo-36718511.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Modern Inputs */
 input, button {
     font: inherit;

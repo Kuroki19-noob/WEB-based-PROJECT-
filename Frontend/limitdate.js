@@ -62,7 +62,7 @@ async function getReservationError() {
             errorDisplay.style.color = "green";
             errorDisplay.innerHTML = "Reservation Successful! Redirecting...";
             setTimeout(() => {
-                window.location.href = "index.html";
+                window.location.href = "/index.html";
             }, 2000);
         } else {
             errorDisplay.style.color = "red";

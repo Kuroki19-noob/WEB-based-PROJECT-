@@ -128,6 +128,7 @@ async function getLoginError(email, pass) {
 
             alert("Login successful! Redirecting...");
             window.location.href = "/index.html";
+
         } else {
             errorDisplay.style.color = "red";
             errorDisplay.innerHTML = result.message || "Invalid credentials.";
@@ -187,6 +188,7 @@ async function getReservationError(dateVal, emailVal, phoneVal, tableVal) {
             errorDisplay.innerHTML = "Reservation Successful! Redirecting...";
             setTimeout(() => {
                 window.location.href = "/index.html";
+
             }, 2000);
         } else {
             errorDisplay.style.color = "red";

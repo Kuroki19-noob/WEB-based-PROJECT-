@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Lagman’s Diner</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="logout.js" defer></script>
+    <script src="profile.js" defer></script>
+</head>
+<body>
+    <nav class="top-bar">
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/Pages/menu.html">Menu</a></li>
+                <li><a href="/Pages/Reservation.html">Reservation</a></li>
+                <li><a href="/Pages/team.html">Team</a></li>
+                <li><a href="/Profile.html">Profile</a></li>
+                <li><a href="#" id="logoutBtn">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container" style="display: flex; justify-content: center; align-items: center; min-height: 70vh;">
+        <div style="background: white; padding: 3rem; border-radius: 12px; width: min(500px, 95%); box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid var(--border-color);">
+            <h1 style="margin-bottom: 2rem; text-align: center;">Account Profile</h1>
+            
+            <div id="profile-content" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <div style="padding-bottom: 1rem; border-bottom: 1px solid #eee;">
+                    <label style="font-weight: bold; color: #666; font-size: 0.8rem; text-transform: uppercase;">Username</label>
+                    <p id="prof-username" style="font-size: 1.2rem; margin-top: 0.3rem;">Loading...</p>
+                </div>
+
+                <div style="padding-bottom: 1rem; border-bottom: 1px solid #eee;">
+                    <label style="font-weight: bold; color: #666; font-size: 0.8rem; text-transform: uppercase;">Email Address</label>
+                    <p id="prof-email" style="font-size: 1.2rem; margin-top: 0.3rem;">Loading...</p>
+                </div>
+
+                <div style="padding-bottom: 1rem;">
+                    <label style="font-weight: bold; color: #666; font-size: 0.8rem; text-transform: uppercase;">Account Role</label>
+                    <p id="prof-role" style="font-size: 1rem; margin-top: 0.3rem; display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; background: var(--accent-color); color: white;">Loading...</p>
+                </div>
+            </div>
+
+            <div id="admin-link-container" style="margin-top: 2rem; display: none; text-align: center;">
+                <hr style="margin-bottom: 1.5rem; border: 0; border-top: 1px solid var(--border-color);">
+                <a href="/Admin.html" style="color: var(--accent-color); text-decoration: none; font-weight: bold;">Go to Admin Dashboard →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="container" style="text-align: center; border-top: 1px solid var(--border-color); margin-top: 4rem;">
+        <p>&copy; 2026 Lagman’s Diner</p>
+    </footer>
+</body>
+</html>

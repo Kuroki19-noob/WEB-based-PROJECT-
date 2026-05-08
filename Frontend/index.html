@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lagman’s Diner | Home</title>
     <link rel="stylesheet" href="style.css">
+    <script src="utils.js" defer></script>
     <script src="script.js" defer></script>
     <script src="logout.js" defer></script>
 </head>
@@ -23,15 +24,14 @@
     </nav>
 
     <header class="hero-bg">
-        <div class="container" style="text-align: center; color: white;">
+        <div class="container">
             <h1>Lagman’s Diner</h1>
-            <a href="/Pages/Reservation.html"><button style="width: auto; padding: 1rem 3rem; margin-top: 2rem;">Book a Table</button></a>
+            <a href="/Pages/Reservation.html"><button>Book a Table</button></a>
         </div>
     </header>
 
     <main class="container">
-        <section class="grid" style="align-items: center; margin-bottom: 4rem;">
-            <img src="/assets/lagman.png" alt="Legacy" style="border-radius: 12px;">
+        <section class="menu-item">
             <div>
                 <h2>Lagman’s Father Legacy</h2>
                 <p>Lagman’s Diner was born from the vision of Lolo Domingo, recreating the warmth of his childhood home through the spirit of Salo-Salo. We invite you to share a meal like family.</p>
@@ -39,21 +39,20 @@
         </section>
 
         <h2>Discover Our Specialties</h2>
-        <div class="grid" style="margin-top: 2rem;">
-            <div style="border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden;">
-                <img src="/assets/adobo.jpg" alt="Adobo" style="width: 100%; aspect-ratio: 16/9; object-fit: cover;">
-                <div style="padding: 1rem;"><h3>Adobo</h3></div>
+        <div class="grid grid-3">
+            <div class="card">
+                <img src="/assets/adobo.jpg" alt="Adobo" class="card-img">
+                <div class="card-content"><h3>Adobo</h3></div>
             </div>
-            <div style="border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden;">
-                <img src="/assets/menudo.jpg" alt="Menudo" style="width: 100%; aspect-ratio: 16/9; object-fit: cover;">
-                <div style="padding: 1rem;"><h3>Menudo</h3></div>
+            <div class="card">
+                <img src="/assets/menudo.jpg" alt="Menudo" class="card-img">
+                <div class="card-content"><h3>Menudo</h3></div>
             </div>
-            <div style="border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden;">
-                <img src="/assets/letchon_kawali.jpg" alt="Lechon Kawali" style="width: 100%; aspect-ratio: 16/9; object-fit: cover;">
-                <div style="padding: 1rem;"><h3>Lechon Kawali</h3></div>
+            <div class="card">
+                <img src="/assets/letchon_kawali.jpg" alt="Lechon Kawali" class="card-img">
+                <div class="card-content"><h3>Lechon Kawali</h3></div>
             </div>
         </div>
-
     </main>
 
     <footer class="container" style="text-align: center; border-top: 1px solid var(--border-color); margin-top: 4rem;">

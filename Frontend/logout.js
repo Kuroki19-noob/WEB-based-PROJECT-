@@ -17,7 +17,7 @@
             localStorage.removeItem('user');
         }
 
-        const protectedPages = ['/index.html', '/pages/menu.html', '/pages/reservation.html', '/pages/team.html', '/profile.html'];
+        const protectedPages = ['/index.html', '/pages/menu.html', '/pages/reservation.html', '/pages/team.html', '/profile.html', '/admin.html'];
         const authPages = ['/login.html', '/signup.html'];
         const isRoot = path.endsWith('/') || path === '';
         const isProtected = isRoot || protectedPages.some(p => path.includes(p));

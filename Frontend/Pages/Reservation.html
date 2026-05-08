@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservation | Lagman’s Diner</title>
     <link rel="stylesheet" href="../style.css">
+    <script src="/utils.js" defer></script>
     <script src="/script.js" defer></script>
     <script src="/limitdate.js" defer></script>
     <script src="/logout.js" defer></script>
@@ -25,26 +26,34 @@
 
     <main class="container">
         <h1>Reservation</h1>
-        <div id="error-msg" style="color: red; margin-bottom: 1rem;"></div>
-        <div style="max-width: 500px; margin: 0 auto; background: white; padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color);">
-            <form id="form">
-                <label>Name:</label>
-                <input type="text" id="name-id" required style="margin-bottom: 1rem;">
-                
-                <label>Email:</label>
-                <input type="email" id="email-id" required style="margin-bottom: 1rem;">
-                
-                <label>Table Number:</label>
-                <input type="number" id="table-id" min="1" max="13" value="1" required style="margin-bottom: 1rem;">
-                
-                <label>Phone Number:</label>
-                <input type="tel" id="phone-id" required style="margin-bottom: 1rem;">
-                
-                <label>Date:</label>
-                <input type="date" id="dateID" required style="margin-bottom: 1rem;">
-                
-                <button type="submit">Submit Reservation</button>
-            </form>
+        <div id="error-msg" style="color: red; margin-bottom: 1rem; text-align: center;"></div>
+        
+        <div class="card" style="max-width: 600px; margin: 0 auto;">
+            <div class="card-content">
+                <form id="form">
+                    <label for="name-id">Full Name</label>
+                    <input type="text" id="name-id" placeholder="Your Name" required>
+                    
+                    <label for="email-id">Email Address</label>
+                    <input type="email" id="email-id" placeholder="your@email.com" required>
+                    
+                    <div class="grid grid-2" style="gap: 1rem;">
+                        <div>
+                            <label for="table-id">Table Number (1-13)</label>
+                            <input type="number" id="table-id" min="1" max="13" value="1" required>
+                        </div>
+                        <div>
+                            <label for="dateID">Reservation Date</label>
+                            <input type="date" id="dateID" required>
+                        </div>
+                    </div>
+                    
+                    <label for="phone-id">Phone Number</label>
+                    <input type="tel" id="phone-id" placeholder="0912-345-6789" required>
+                    
+                    <button type="submit" style="width: 100%;">Confirm Booking</button>
+                </form>
+            </div>
         </div>
     </main>
 

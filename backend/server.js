@@ -27,6 +27,8 @@ app.use("/api/v1/accounts", require("./routes/accountsRoutes"));
 app.use("/api/v1/reservations", require("./routes/reservationRoutes"));
 
 app.use((err, req, res, next) => {
+    console.error('--- Global Error Handler ---');
+    console.error(err);
     res.status(err.status || 500).send({
         success: false,
         message: err.message

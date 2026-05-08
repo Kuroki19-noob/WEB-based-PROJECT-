@@ -19,9 +19,12 @@ if (form) {
             const dateVal = dateInput.value;
             const emailVal = emailInput.value.trim();
             const phoneVal = phoneInput.value.trim();
+            const nameEl = document.getElementById('name-id');
+            const nameVal = nameEl ? nameEl.value.trim() : '';
             const tableVal = parseInt(tableInput.value);
 
-            getReservationError(dateVal, emailVal, phoneVal, tableVal);
+            console.log('Reservation Data:', { dateVal, emailVal, phoneVal, nameVal, tableVal });
+            getReservationError(dateVal, emailVal, phoneVal, tableVal, nameVal);
             return;
         }
 
@@ -51,12 +54,12 @@ async function getSignupError(user, email, pass, repeatPass) {
     }
 
     if (errors.length > 0) {
-        errorDisplay.style.color = "red";
-        errorDisplay.innerHTML = errors.join("<br>");
+        showAlert('error-msg', errors.join(" "), 'error');
         return; 
     }
 
     try {
+        showAlert('error-msg', "Creating account...", 'info');
         const response = await fetch(`${apiBase}/accounts/create-account`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -71,20 +74,17 @@ async function getSignupError(user, email, pass, repeatPass) {
         const result = await response.json();
 
         if (response.ok) {
-            errorDisplay.style.color = "green";
-            errorDisplay.innerHTML = "Account successfully made! Redirecting...";
+            showAlert('error-msg', "Account successfully made! Redirecting...", 'success');
             
             setTimeout(() => {
                 window.location.href = "/Login.html";
             }, 2000);
         } else {
-            errorDisplay.style.color = "red";
-            errorDisplay.innerHTML = result.message; 
+            showAlert('error-msg', result.message, 'error'); 
         }
 
     } catch (err) {
-        errorDisplay.style.color = "red";
-        errorDisplay.innerHTML = "Server is offline. Please try again later.";
+        showAlert('error-msg', "Server is offline. Please try again later.", 'error');
     }
 }
 
@@ -95,7 +95,6 @@ async function getLoginError(email, pass) {
 
     if (email === "") missingFields.push("Email");
     if (pass === "") missingFields.push("Password");
-    if (pass.length >= 20) missingFields.push("Password (too long)");
 
     if (missingFields.length > 0) {
         let combinedError = missingFields.join(", ") + " must be filled correctly.";
@@ -103,14 +102,12 @@ async function getLoginError(email, pass) {
     }
 
     if (errors.length !== 0) {
-        errorDisplay.style.color = "red";
-        errorDisplay.innerHTML = errors.join("<br>");
+        showAlert('error-msg', errors.join(" "), 'error');
         return errors; 
     }
 
     try {
-        errorDisplay.style.color = "blue";
-        errorDisplay.innerHTML = "Logging in...";
+        showAlert('error-msg', "Logging in...", 'info');
 
         const response = await fetch(`${apiBase}/accounts/login`, {
             method: 'POST',
@@ -121,83 +118,81 @@ async function getLoginError(email, pass) {
         const result = await response.json();
 
         if (response.ok && result.success) {
-            errorDisplay.style.color = "green";
-            errorDisplay.innerHTML = "Log in successfully!";
+            showAlert('error-msg', "Log in successfully! Redirecting...", 'success');
             localStorage.setItem('user', JSON.stringify(result.user));
             localStorage.setItem('token', result.token);
 
-            alert("Login successful! Redirecting...");
-            window.location.href = "/index.html";
+            setTimeout(() => {
+                window.location.href = "/index.html";
+            }, 1000);
 
         } else {
-            errorDisplay.style.color = "red";
-            errorDisplay.innerHTML = result.message || "Invalid credentials.";
+            showAlert('error-msg', result.message || "Invalid credentials.", 'error');
             errors.push(result.message);
         }
 
     } catch (err) {
-        errorDisplay.style.color = "red";
-        errorDisplay.innerHTML = "Cannot connect to server.";
+        showAlert('error-msg', "Cannot connect to server.", 'error');
         errors.push("Server connection error");
     }
 
     return errors;
 }
 
-async function getReservationError(dateVal, emailVal, phoneVal, tableVal) {
+async function getReservationError(dateVal, emailVal, phoneVal, tableVal, nameVal) {
     const errorDisplay = document.getElementById('error-msg');
 
-    if (!dateVal || !emailVal || !phoneVal || isNaN(tableVal)) {
-        errorDisplay.style.color = "red";
-        errorDisplay.innerHTML = "All fields are required.";
+    if (!dateVal || !emailVal || !phoneVal || isNaN(tableVal) || !nameVal) {
+        showAlert('error-msg', "All fields are required.", 'error');
         return;
     }
 
     if (tableVal <= 0 || tableVal > 13) {
-        errorDisplay.style.color = "red";
-        errorDisplay.innerHTML = "Please choose a table between 1 and 13.";
+        showAlert('error-msg', "Please choose a table between 1 and 13.", 'error');
         return;
     }
 
     const phoneRegex = /^\d{10,}$/;
     if (!phoneRegex.test(phoneVal.replace(/\D/g, ''))) {
-        errorDisplay.style.color = "red";
-        errorDisplay.innerHTML = "Please enter a valid phone number.";
+        showAlert('error-msg', "Please enter a valid phone number.", 'error');
         return;
     }
 
     try {
-        errorDisplay.style.color = "blue";
-        errorDisplay.innerHTML = "Sending reservation...";
+        showAlert('error-msg', "Sending reservation...", 'info');
+
+        const payload = {
+            DateD: dateVal,
+            TableNum: tableVal,
+            email: emailVal,
+            number: phoneVal,
+            name: nameVal
+        };
+        console.log('Sending Payload:', payload);
 
         const response = await fetch(`${apiBase}/reservations/create-reservation`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                DateD: dateVal,
-                TableNum: tableVal,
-                email: emailVal,
-                number: phoneVal
-            })
+            body: JSON.stringify(payload)
         });
 
         const data = await response.json();
 
         if (response.ok && data.success) {
-            errorDisplay.style.color = "green";
-            errorDisplay.innerHTML = "Reservation Successful! Redirecting...";
+            showAlert('error-msg', "Reservation Successful! Redirecting...", 'success');
             setTimeout(() => {
                 window.location.href = "/index.html";
-
             }, 2000);
         } else {
-            errorDisplay.style.color = "red";
-            errorDisplay.innerHTML = data.message || "Failed to create reservation.";
+            let errorMsg = data.message || "Failed to create reservation.";
+            if (data.errors && Array.isArray(data.errors)) {
+                errorMsg = data.errors.map(err => `${err.path || err.param}: ${err.msg}`).join(", ");
+            }
+            showAlert('error-msg', errorMsg, 'error');
         }
 
     } catch (err) {
-        errorDisplay.style.color = "red";
-        errorDisplay.innerHTML = "Server Offline or CORS error.";
+        showAlert('error-msg', "Server connection error.", 'error');
         console.error("Error:", err);
     }
 }

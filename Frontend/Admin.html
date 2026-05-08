@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | Lagman’s Diner</title>
     <link rel="stylesheet" href="style.css">
+    <script src="utils.js" defer></script>
     <script src="logout.js" defer></script>
+    <script src="admin.js" defer></script>
 </head>
 <body>
     <nav class="top-bar">
@@ -28,17 +30,17 @@
                 <thead>
                     <tr style="background-color: var(--accent-color); color: white;">
                         <th style="padding: 1rem;">ID</th>
+                        <th style="padding: 1rem;">Name</th>
                         <th style="padding: 1rem;">Date</th>
                         <th style="padding: 1rem;">Table</th>
                         <th style="padding: 1rem;">Email</th>
                         <th style="padding: 1rem;">Phone</th>
+                        <th style="padding: 1rem;">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="res-body"></tbody>
             </table>
         </div>
     </main>
-
-    <script src="admin.js"></script>
 </body>
 </html>

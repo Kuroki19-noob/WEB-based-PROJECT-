@@ -54,7 +54,7 @@
                     const controller = new AbortController();
                     const timeoutId = setTimeout(() => controller.abort(), 2000);
 
-                    await fetch(`${window.location.origin}/api/v1/accounttbl/logout`, {
+                    await fetch(`${window.location.origin}/api/v1/accounts/logout`, {
                         method: 'POST',
                         signal: controller.signal 
                     });

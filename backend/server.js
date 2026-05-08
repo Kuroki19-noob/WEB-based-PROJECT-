@@ -13,6 +13,7 @@ const mySqlPool = require('./config/db');
 
 const app = express();
 const frontendPath = path.join(__dirname, '..', 'Frontend');
+const assetsPath = path.join(__dirname, '..', 'assets');
 const PORT = process.env.PORT || 8000;
 
 app.use(helmet());
@@ -20,6 +21,7 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.static(frontendPath));
+app.use('/assets', express.static(assetsPath));
 
 app.use("/api/v1/accounts", require("./routes/accountsRoutes"));
 app.use("/api/v1/reservations", require("./routes/reservationRoutes"));

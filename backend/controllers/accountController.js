@@ -1,10 +1,11 @@
+const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const db = require("../config/db")
 
 const getAccounts = async(req,res) => {
     try {
-        const data = await db.query('SELECT * FROM accounttbl')
-        if(!data){
+        const [data] = await db.query('SELECT accountID, username, email, role FROM accounttbl')
+        if(!data || data.length === 0){
             return res.status(404).send({
                    success:false,
                    message:'no Records Found'
@@ -13,8 +14,8 @@ const getAccounts = async(req,res) => {
         res.status(200).send({
             success:true,
             message:'All Accounts Records',
-            totalAccounts: data[0].length,
-            data:data[0],
+            totalAccounts: data.length,
+            data:data,
         })
     } catch (error) {
         console.log(error)
@@ -56,11 +57,21 @@ const loginAccount = async (req, res) => {
             });
         }
 
+        const token = jwt.sign(
+            { 
+                id: userAccount.accountID || userAccount.id, 
+                role: userAccount.role 
+            },
+            process.env.JWT_SECRET || 'your_default_secret_key',
+            { expiresIn: '1d' }
+        );
+
         res.status(200).send({
             success: true,
             message: 'Login successful!',
+            token,
             user: {
-                id: userAccount.accountID ?? userAccount.id,
+                id: userAccount.accountID || userAccount.id,
                 username: userAccount.username,
                 email: userAccount.email,
                 role: userAccount.role
@@ -86,8 +97,8 @@ const getAccountByID =async (req,res) => {
             })
         }
 
-       const data = await db.query(`SELECT * FROM accounttbl WHERE accountID=?`, [accountID])
-       if(!data){
+       const [data] = await db.query(`SELECT accountID, username, email, role FROM accounttbl WHERE accountID=?`, [accountID])
+       if(!data || data.length === 0){
         return res.status(404).send({
              success:false,
              message:'No Records Found'

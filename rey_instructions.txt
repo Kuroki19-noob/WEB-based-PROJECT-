@@ -9,6 +9,7 @@ DB_USER=root
 DB_PASSWORD=lcc
 DB_NAME=lagmandb
 PORT=8000
+JWT_SECRET=your_super_secret_key_here
 
 3. Database Setup
 // Required for admin dashboard
@@ -19,6 +20,9 @@ CREATE TABLE accounttbl (
     password VARCHAR(255) NOT NULL,
     role VARCHAR(20) DEFAULT 'user'
 );
+
+// To access Admin Dashboard, manually update a user's role to 'admin' in MySQL:
+// UPDATE accounttbl SET role = 'admin' WHERE username = 'your_username';
 
 // Required for reservation page
 CREATE TABLE reservationttbl (
@@ -31,7 +35,12 @@ CREATE TABLE reservationttbl (
 
 4. Installation & Running
 1. Run `npm install`.
-2. Start the server using `npm start`.
+2. Start the server using `npm run dev` or `npm start`.
 3. Access at http://localhost:8000.
+
+5. Authentication & Security
+- The system uses JWT (JSON Web Tokens) for security.
+- Sensitive routes (View All Accounts, View Reservations) are protected and require admin role.
+- API endpoints follow RESTful conventions: /api/v1/accounts and /api/v1/reservations.
 
 - Reymart

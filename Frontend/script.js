@@ -57,7 +57,7 @@ async function getSignupError(user, email, pass, repeatPass) {
     }
 
     try {
-        const response = await fetch(`${apiBase}/accounttbl/create-account`, {
+        const response = await fetch(`${apiBase}/accounts/create-account`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
@@ -112,7 +112,7 @@ async function getLoginError(email, pass) {
         errorDisplay.style.color = "blue";
         errorDisplay.innerHTML = "Logging in...";
 
-        const response = await fetch(`${apiBase}/accounttbl/login`, {
+        const response = await fetch(`${apiBase}/accounts/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: email, password: pass }) 
@@ -124,6 +124,7 @@ async function getLoginError(email, pass) {
             errorDisplay.style.color = "green";
             errorDisplay.innerHTML = "Log in successfully!";
             localStorage.setItem('user', JSON.stringify(result.user));
+            localStorage.setItem('token', result.token);
 
             alert("Login successful! Redirecting...");
             window.location.href = "/index.html";
@@ -168,7 +169,7 @@ async function getReservationError(dateVal, emailVal, phoneVal, tableVal) {
         errorDisplay.style.color = "blue";
         errorDisplay.innerHTML = "Sending reservation...";
 
-        const response = await fetch(`${apiBase}/reservationttbl/create-reservation`, {
+        const response = await fetch(`${apiBase}/reservations/create-reservation`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

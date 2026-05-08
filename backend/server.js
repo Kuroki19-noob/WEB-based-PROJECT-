@@ -19,8 +19,8 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.static(frontendPath));
 
-app.use("/api/v1/accounttbl", require("./routes/accountsRoutes"));
-app.use("/api/v1/reservationttbl", require("./routes/reservationRoutes"));
+app.use("/api/v1/accounts", require("./routes/accountsRoutes"));
+app.use("/api/v1/reservations", require("./routes/reservationRoutes"));
 
 app.use((err, req, res, next) => {
     res.status(err.status || 500).send({

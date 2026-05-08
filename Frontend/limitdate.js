@@ -40,7 +40,7 @@ async function getReservationError() {
         errorDisplay.style.color = "blue";
         errorDisplay.innerHTML = "Processing...";
 
-        const response = await fetch('http://localhost:8000/api/v1/reservationttbl/create-reservation', {
+        const response = await fetch('/api/v1/reservations/create-reservation', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

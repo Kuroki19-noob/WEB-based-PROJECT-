@@ -21,7 +21,7 @@ async function getReservationError() {
         errorDisplay.style.color = "blue";
         errorDisplay.innerHTML = "Sending reservation...";
 
-        const response = await fetch('http://localhost:8000/api/v1/reservationttbl/create-reservation', {
+        const response = await fetch('/api/v1/reservations/create-reservation', {
             method: 'POST', // This MUST match router.post in backend
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

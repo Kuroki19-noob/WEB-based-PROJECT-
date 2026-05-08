@@ -7,7 +7,7 @@ if (form) {
         e.preventDefault();
 
         const dateInput = document.getElementById('dateID');
-        const emailInput = document.getElementById('email-id');
+        const emailInput = document.getElementById('email-id') || document.getElementById('email-input');
         const phoneInput = document.getElementById('phone-id');
         const tableInput = document.getElementById('table-id');
         const usernameInput = document.getElementById('username-input');

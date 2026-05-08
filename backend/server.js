@@ -5,9 +5,11 @@ const helmet = require('helmet');
 const colors = require('colors');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
-const mySqlPool = require('./config/db');
 
+// Load environment variables immediately
 dotenv.config();
+
+const mySqlPool = require('./config/db');
 
 const app = express();
 const frontendPath = path.join(__dirname, '..', 'Frontend');

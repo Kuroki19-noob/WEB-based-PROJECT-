@@ -39,7 +39,6 @@ const loginAccount = async (req, res) => {
         }
 
         const [rows] = await db.query('SELECT * FROM accounttbl WHERE email = ?', [email]);
-
         if (rows.length === 0) {
             return res.status(404).send({
                 success: false,
